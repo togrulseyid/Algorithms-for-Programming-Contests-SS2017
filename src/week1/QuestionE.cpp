@@ -4,6 +4,7 @@
 #include <iostream>
 //#include <sstream>
 #include <cstdlib>
+#include <cstdio>
 //#include <cmath>
 
 using namespace std;
@@ -12,57 +13,43 @@ class ProblemE {
 public:
     long long int parseString(std::string line) {
         iteration = 0;
-        /*long long int*/ digit = getInt(line, iteration);
-
+        long long int digit = getInt(line, iteration);
         for (int i = iteration; i < line.size(); i++) {
             i = iteration;
 
-            while (!isdigit(line[i])) {
+            while (!isdigit(line[i]) && i < line.size()) {
                 if (line[i] == 'p') { //plus
                     i = iteration + 4;
-//                    long long int eded = getInt(line, i);
-//                    digit += eded;
                     digit += getInt(line, i);
-//                std::cout << "plus:digit: " << digit << std::endl;
 
                 } else if (line[i] == 'm') { //minus
                     i = iteration + 5;
-//                    long long int eded = getInt(line, i);
-//                    digit -= eded;
                     digit -= getInt(line, i);
-//                std::cout << "minus:digit: " << digit << std::endl;
 
                 } else if (line[i] == 't' && line[i + 1] == 'i') { // times
                     i = iteration + 5;
-//                    long long int eded = getInt(line, i);
-//                    digit *= eded;
                     digit *= getInt(line, i);
-//                std::cout << "times:digit: " << digit << std::endl;
 
-                } else if (line[i] == 't' && line[i + 1] == 'o') { //tothepowerof
+                } else if (line[i] == 't' && line[i + 11] == 'f') { //tothepowerof
                     i = iteration + 12;
-//                    long long int eded = getInt(line, i);
                     long long int eded2 = 1;
                     for (int j = 0; j < getInt(line, i); j++) {
                         eded2 *= digit;
                     }
                     digit = eded2;
-//
-//                    digit = std::pow(digit, getInt(line, i));
-//                std::cout << "tothepowerof:digit: " << digit << std::endl;
                 }
-                i += 1;
+                i++;
             }
         }
 
         return digit;
     }
 
-//private:
+private:
     int iteration = 0;
-    long long int digit = 0;
+//    long long int digit = 0;
 
-    long long int getIntX(std::string line, int i) {
+    long long int getInt(std::string line, int i) {
         long long int number = 0;
         while (isdigit(line[i]) && i < line.size()) {
             number += (line[i] - '0');
@@ -75,7 +62,7 @@ public:
     }
 
     // Convert string to int
-    long long int getInt(std::string line, int i) {
+    long long int getIntX(std::string line, int i) {
         long long int number = 0;
         std::string stringNumber;
         while (isdigit(line[i]) && i < line.size()) {
@@ -93,9 +80,7 @@ public:
 
 
 int main() {
-//    ProblemE problemE;
-//    problemE.getInt("0plus0minus333333333", 11);
-//    cout << problemE.getInt("13232132132131311", 0);
+    freopen("output.txt", "w", stdout); //Redirect cin and cout to files
     int times;
     int counter = 0;
     std::string line;
@@ -104,10 +89,10 @@ int main() {
     std::ios_base::sync_with_stdio(false); // Supposedly makes I/O faster
     ProblemE problemE;
     std::cin >> times;
-
-    while (times-- > 0) {
+    std::getline(std::cin, line);
+    while (times--) {
         counter++;
-        std::cin >> line;
-        std::cout << "Case #" << counter << ": " << problemE.parseString(line) << endl;
+        std::getline(std::cin, line);
+        std::cout << "Case #" << counter << ": " << problemE.parseString(line) << std::endl;
     }
 }

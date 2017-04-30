@@ -18,36 +18,29 @@ public:
     void replaceString(string line) {
         std::vector<std::string> words = split(line);
 
+        std::cout << "burdadi" << std::endl;
         for (int i = 0; i < words.size(); ++i) {
+            std::cout << i << endl;
 
             if (replace(words[i], "studentin", "studierende")) {
-//                std::cout << words[i] << " ";
                 continue;
             } else if (replace(words[i], "studenten", "studierende")) {
-//                std::cout << words[i] << " ";
                 continue;
-            }
-            if (replace(words[i], "student", "studierender")) {
-//                std::cout << words[i] << " ";
+            } else if (replace(words[i], "student", "studierender")) {
                 continue;
             } else if (replace(words[i], "entin", "studierender")) {
-//                std::cout << words[i] << " ";
                 continue;
             } else if (replace(words[i], "enten", "ierende")) {
-//                std::cout << words[i] << " ";
                 continue;
             } else if (replace(words[i], "ent", "ierender")) {
-//                std::cout << words[i] << " ";
                 continue;
             }
-
-//            std::cout << words[i] << " ";
         }
         for (int i = 0; i < words.size() - 1; ++i) {
             std::cout << words[i] << " ";
         }
 //        if (words.size() > 0)
-        std::cout << words[words.size() - 1] << std::endl;
+        std::cout << words[words.size() - 1];
 
     }
 
@@ -77,27 +70,26 @@ private:
 };
 
 int main() {
+    QuestionC questionX;
+    questionX.replaceString("ein zierenderner ierende ierenderhaelt keine studierende");
+    exit(-1);
     std::ios_base::sync_with_stdio(false); // Supposedly makes I/O faster
+//    freopen("output.txt", "w", stdout); //Redirect cin and cout to files
 
     QuestionC questionC;
     int t;
     int times;
-    int counter = 1;
     std::cin >> t;
-    while (t--) {
-        std::cin >> times;
-        std::cout << "Case #" << counter << ":" << std::endl;
-        std::string line;
+    std::cin >> times;
+    std::cout << "Case #1:" << std::endl;
+    std::string line;
+    std::getline(std::cin, line);
+    while (times-- > 0) {
         std::getline(std::cin, line);
-        while (times-- > 0) {
-            std::getline(std::cin, line);
-            if (line != "") {
-                questionC.replaceString(line);
-            } else {
-                std::cout << endl;
-            }
+        if (line != "") {
+            questionC.replaceString(line);
+            std::cout << std::endl;
         }
-        counter++;
     }
 
     return 0;
